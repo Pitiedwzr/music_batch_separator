@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "music_batch_separator", "music_batch_separator.pyproj", "{5D616736-C4F9-4964-A90E-3FD3D6AB19F3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D616736-C4F9-4964-A90E-3FD3D6AB19F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D616736-C4F9-4964-A90E-3FD3D6AB19F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C7295233-062A-4CD7-9D65-404D1701C217}
+	EndGlobalSection
+EndGlobal
