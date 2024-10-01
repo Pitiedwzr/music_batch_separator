@@ -34,10 +34,18 @@ class SettingsDialog(QDialog):
         self.initSlot()
         
     def initSlot(self):
-        self.ui.pushButtonSave.clicked.connect(config.save)
+        self.ui.pushButtonSave.clicked.connect(self.saveSettings)
+        self.ui.pushButtonCancel.clicked.connect(self.exitSettings)
+        self.ui.comboBoxOutputFormat.setCurrentIndex(config.common.output_format)
+        self.ui.checkBoxIsDemo.setChecked(config.common.is_demo)
+
+    def saveSettings(self):
+        config.common.output_format = self.ui.comboBoxOutputFormat.currentIndex()
+        config.common.is_demo = self.ui.checkBoxIsDemo.isChecked()
+        config.save()
         
     def exitSettings(self):
-        self0
+        settings_dialog.hide()
 
 # Main program running
 if __name__ == "__main__":
