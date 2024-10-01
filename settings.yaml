@@ -1,0 +1,5 @@
+common:
+    output_format: "flac"
+    is_demo: false
+secert:
+    token: "YOUR_API_TOKEN"
