@@ -1,0 +1,106 @@
+name: Package and Release Python Code
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  meta:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.get_tag.outputs.tag }}
+      is_release: ${{ steps.check_release.outputs.is_release }}
+    steps:
+      - name: Get tag
+        id: get_tag
+        run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+      - name: Check if it's a release
+        id: check_release
+        run: |
+          if [[ ${{ steps.get_tag.outputs.tag }} == v* ]]; then
+            echo "is_release=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_release=false" >> $GITHUB_OUTPUT
+          fi
+
+  build:
+    needs: meta
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-13, ubuntu-latest]
+        python-version: [3.10.11]
+        include:
+          - os: macos-latest
+            python-version: 3.10.11
+            arch: arm64
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: ${{ matrix.arch || 'x64' }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+          pip install pillow
+
+      - name: Run PyInstaller
+        run: |
+          pyinstaller --onedir --icon Resource/images/icon.ico --windowed FileArchiver.py
+
+      - name: Copy additional files
+        run: |
+          mkdir -p dist/FileArchiver/db/
+          cp db/users.db dist/FileArchiver/db/
+          mkdir -p dist/FileArchiver/rules/
+          cp rules/default.yaml dist/FileArchiver/rules/
+          mkdir -p dist/FileArchiver/resource/images/
+          cp resource/images/icon.ico dist/FileArchiver/resource/images/
+          mkdir -p dist/FileArchiver/translations/
+          cp translations/*.qm dist/FileArchiver/translations/
+          cp settings.yaml dist/FileArchiver/
+          mv dist/FileArchiver dist/FileArchiver_${{ runner.os }}_${{ matrix.arch || 'x64' }}_${{ needs.meta.outputs.tag }}
+
+      - name: Compress directory
+        shell: bash
+        run: |
+          cd dist
+          if [ "${{ runner.os }}" == "Windows" ]; then
+            7z a FileArchiver_${{ runner.os }}_${{ matrix.arch || 'x64' }}_${{ needs.meta.outputs.tag }}.zip FileArchiver_${{ runner.os }}_${{ matrix.arch || 'x64' }}_${{ needs.meta.outputs.tag }}
+          else
+            zip -r FileArchiver_${{ runner.os }}_${{ matrix.arch || 'x64' }}_${{ needs.meta.outputs.tag }}.zip FileArchiver_${{ runner.os }}_${{ matrix.arch || 'x64' }}_${{ needs.meta.outputs.tag }}
+          fi
+          cd ..
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: FileArchiver_${{ runner.os }}_${{ matrix.arch || 'x64' }}
+          path: dist/*.zip
+
+  release:
+    if: ${{ needs.meta.outputs.is_release == 'true' }}
+    needs: [meta, build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: ./
+          pattern: FileArchiver_*
+          merge-multiple: true
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./*.zip
+          tag_name: ${{ needs.meta.outputs.tag }}
