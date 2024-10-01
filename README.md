@@ -11,11 +11,13 @@
 
 
 <!-- PROJECT LOGO -->
+<!--
 <br />
 <div align="center">
   <a href="https://github.com/Pitiedwzr/music_batch_separator">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
+-->
 
 <h3 align="center">Music Batch Separator</h3>
 
@@ -106,9 +108,9 @@ Make sure you have python 64-bit installed on your computer
    ```sh
    pip install -r requirements.txt
    ```
-4. Enter your API in `config.yaml`
+4. Enter your API in `settings.yaml`
    ```
-   API_TOKEN: 'YOUR_API_TOKEN'
+   token: "YOUR_API_TOKEN"
    ```
 5. Use `main.py` to run the main program
 
