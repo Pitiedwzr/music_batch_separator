@@ -41,16 +41,16 @@ class Ui_MainWindow(object):
         self.gridLayout.setObjectName(u"gridLayout")
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.label = QLabel(self.centralwidget)
-        self.label.setObjectName(u"label")
-        self.label.setMinimumSize(QSize(0, 20))
+        self.labelInput = QLabel(self.centralwidget)
+        self.labelInput.setObjectName(u"labelInput")
+        self.labelInput.setMinimumSize(QSize(0, 20))
 
-        self.verticalLayout_2.addWidget(self.label)
+        self.verticalLayout_2.addWidget(self.labelInput)
 
-        self.listWidget = QListWidget(self.centralwidget)
-        self.listWidget.setObjectName(u"listWidget")
+        self.listWidgetInput = QListWidget(self.centralwidget)
+        self.listWidgetInput.setObjectName(u"listWidgetInput")
 
-        self.verticalLayout_2.addWidget(self.listWidget)
+        self.verticalLayout_2.addWidget(self.listWidgetInput)
 
 
         self.gridLayout.addLayout(self.verticalLayout_2, 0, 0, 3, 1)
@@ -73,11 +73,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3 = QVBoxLayout()
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.label_2 = QLabel(self.centralwidget)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setMinimumSize(QSize(0, 20))
+        self.labelResult = QLabel(self.centralwidget)
+        self.labelResult.setObjectName(u"labelResult")
+        self.labelResult.setMinimumSize(QSize(0, 20))
 
-        self.verticalLayout_3.addWidget(self.label_2)
+        self.verticalLayout_3.addWidget(self.labelResult)
 
         self.listWidget_2 = QListWidget(self.centralwidget)
         self.listWidget_2.setObjectName(u"listWidget_2")
@@ -121,11 +121,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addItem(self.verticalSpacer_4)
 
-        self.label_5 = QLabel(self.centralwidget)
-        self.label_5.setObjectName(u"label_5")
-        self.label_5.setMinimumSize(QSize(0, 20))
+        self.labelOpt2 = QLabel(self.centralwidget)
+        self.labelOpt2.setObjectName(u"labelOpt2")
+        self.labelOpt2.setMinimumSize(QSize(0, 20))
 
-        self.verticalLayout.addWidget(self.label_5)
+        self.verticalLayout.addWidget(self.labelOpt2)
 
         self.comboBoxOpt2 = QComboBox(self.centralwidget)
         self.comboBoxOpt2.setObjectName(u"comboBoxOpt2")
@@ -137,11 +137,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addItem(self.verticalSpacer)
 
-        self.pushButton = QPushButton(self.centralwidget)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setMinimumSize(QSize(0, 26))
+        self.pushButtonProcess = QPushButton(self.centralwidget)
+        self.pushButtonProcess.setObjectName(u"pushButtonProcess")
+        self.pushButtonProcess.setMinimumSize(QSize(0, 26))
 
-        self.verticalLayout.addWidget(self.pushButton)
+        self.verticalLayout.addWidget(self.pushButtonProcess)
 
 
         self.gridLayout.addLayout(self.verticalLayout, 1, 2, 1, 1)
@@ -178,12 +178,12 @@ class Ui_MainWindow(object):
         self.actionAbout_Qt.setText(QCoreApplication.translate("MainWindow", u"About Qt", None))
         self.actionMusic_Batch_Separator_Help.setText(QCoreApplication.translate("MainWindow", u"Music Batch Separator Help", None))
         self.actionPreferences.setText(QCoreApplication.translate("MainWindow", u"Preferences", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Input Files", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Results", None))
+        self.labelInput.setText(QCoreApplication.translate("MainWindow", u"Input Files", None))
+        self.labelResult.setText(QCoreApplication.translate("MainWindow", u"Results", None))
         self.labelSepType.setText(QCoreApplication.translate("MainWindow", u"Separation type", None))
         self.labelOpt1.setText(QCoreApplication.translate("MainWindow", u"opt_1", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"opt_2", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Process", None))
+        self.labelOpt2.setText(QCoreApplication.translate("MainWindow", u"opt_2", None))
+        self.pushButtonProcess.setText(QCoreApplication.translate("MainWindow", u"Process", None))
         self.menuSettings.setTitle(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.menuHelp.setTitle(QCoreApplication.translate("MainWindow", u"Help", None))
     # retranslateUi

@@ -21,7 +21,7 @@
     <item row="0" column="0" rowspan="3">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="labelInput">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -34,7 +34,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="listWidget"/>
+       <widget class="QListWidget" name="listWidgetInput"/>
       </item>
      </layout>
     </item>
@@ -93,7 +93,7 @@
     <item row="0" column="4" rowspan="3">
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="labelResult">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -185,7 +185,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label_5">
+       <widget class="QLabel" name="labelOpt2">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -221,7 +221,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pushButtonProcess">
         <property name="minimumSize">
          <size>
           <width>0</width>
