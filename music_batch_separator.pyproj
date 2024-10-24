@@ -23,6 +23,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="api.py" />
+    <Compile Include="file.py" />
     <Compile Include="main.py" />
     <Compile Include="settings.py" />
     <Compile Include="UI_mainWindow.py" />
