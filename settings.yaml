@@ -1,5 +1,5 @@
 common:
-  is_demo: false
+  is_demo: 0
   output_format: 1
 secert:
   token: YOUR_API_TOKEN
