@@ -132,9 +132,13 @@ Make sure you have python 64-bit installed on your computer
 ## Roadmap
 
 - [ ] GUI
-- [ ] Basic function
-    - [ ] Post to the url
-    - [ ] Get the result
+    - [ ] Settings
+    - [ ] Main window
+- [ ] Functions
+    - [x] Post to the url
+    - [x] Get the result
+    - [ ] Download file(s)
+    - [ ] Process order
 
 See the [open issues](https://github.com/Pitiedwzr/music_batch_separator/issues) for a full list of proposed features (and known issues).
 
