@@ -2,4 +2,4 @@ common:
   is_demo: 0
   output_format: 1
 secert:
-  token: SEKrzrZQf4mA64lNYRkbewEYD1IvYC
+  token: YOUR_API_TOKEN
