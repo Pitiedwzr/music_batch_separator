@@ -1,7 +1,7 @@
 import os
 
 
-class AudioFile:
+class InputFile:
     """Represents an audio file"""
     def __init__(self, file_path):
         self.path = file_path
@@ -10,3 +10,9 @@ class AudioFile:
         self.status = ""
         self.hash = ""
         self.size = os.path.getsize(self.path)
+        
+class SeparatedFile:
+    def __init__(self, result):
+        self.size = 
+        self.url = ""
+        self.name = ""

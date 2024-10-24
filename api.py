@@ -1,7 +1,7 @@
 import requests
 import time
 from settings import config
-from file import AudioFile
+from file import InputFile
 
 CREATE_URL = "https://mvsep.com/api/separation/create"
 GET_URL = "https://mvsep.com/api/separation/get"
@@ -36,23 +36,23 @@ def checkStatus(audio_file):
         while audio_file.status != "done":
             time.sleep(5)
             response = requests.get(result_url)
-            print(response.text)
             response_json = response.json()
             audio_file.status = response_json["status"]
             print(f"Status: {audio_file.status}")
             
         return response, response_json
 
-audio_file = AudioFile("./Fateful Encounter.mp3")
+def downloadFiles(audio_file):
+
+
+audio_file = InputFile("./Fateful Encounter.mp3")
 audio_file.hash = "20241024004516-ef4bdfa430-fateful-encounter.mp3"
 
 try:
     #response_post, response_post_json = createRequest(audio_file,40,29)
-    #print(f"Status Code: {response_post.status_code}")
-    #print(f"Response: {response_post_json}")
+
     response_get, response_get_json = checkStatus(audio_file)
-    print(f"Status Code: {response_get.status_code}")
-    print(f"Response: {response_get_json}")
+
     
 except Exception as e:
     print(f"An error occurred: {str(e)}")
