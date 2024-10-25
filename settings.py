@@ -42,10 +42,11 @@ class Config:
             'common': self.common.settings,
             'secert': self.secert.settings
         }
-        with open("settings.yaml", 'w', encoding="utf-8") as yaml_data:
+        with open(setting_file, 'w', encoding="utf-8") as yaml_data:
             yaml.safe_dump(data, yaml_data)
 
+setting_file = "settings_token.yaml"
 
 # Load the configuration
-with open("settings.yaml", "r", encoding="utf-8") as setting_data:
+with open(setting_file, "r", encoding="utf-8") as setting_data:
     config = Config(yaml.safe_load(setting_data))
