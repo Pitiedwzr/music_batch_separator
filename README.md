@@ -11,9 +11,9 @@
 
 
 <!-- PROJECT LOGO -->
-<!--
-<br />
+
 <div align="center">
+<!--
   <a href="https://github.com/Pitiedwzr/music_batch_separator">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
@@ -25,6 +25,7 @@
 ![PythonVersion][PythonVersion]
 ![license][License]
 ![platform][Platform]
+
 
   <p align="center">
     Batch separating music, based on the MVSEP API
@@ -137,7 +138,7 @@ Make sure you have python 64-bit installed on your computer
 - [ ] Functions
     - [x] Post to the url
     - [x] Get the result
-    - [ ] Download file(s)
+    - [x] Download file(s)
     - [ ] Process order
 
 See the [open issues](https://github.com/Pitiedwzr/music_batch_separator/issues) for a full list of proposed features (and known issues).
