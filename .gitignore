@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 # Things shouldn't upload to github
 miscs/
+/settings.yaml
