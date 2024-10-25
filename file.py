@@ -8,6 +8,7 @@ class InputFile:
     def __init__(self, file_path):
         self.path = file_path
         self.name = os.path.basename(file_path)
+        self.name_base = os.path.splitext(self.name)[0]
         self.binary = open(self.path, 'rb')
         self.status = ""
         self.hash = ""
@@ -23,16 +24,22 @@ class SeparatedFile:
             format = ".flac"
         elif config.common.output_format == 3:
             format = ".m4a"
-        
+            
+        # Get the files list from the nested structure
+        files_list = []
+        if isinstance(datas, dict):
+            if 'data' in datas and 'files' in datas['data']:
+                files_list = datas['data']['files']
+            elif 'files' in datas:
+                files_list = datas['files']
+        elif isinstance(datas, list):
+            files_list = datas
 
-        # Handle both cases: when datas is a list or when it's a dict with "files" key
-        files_list = datas if isinstance(datas, list) else datas.get("files", [])
-        
-        self.files = []  # Store all files info
+        self.files = []
         for file_data in files_list:
             file_info = {
-                "name": InputFile.name + "_" + file_data["type"] + format,
-                "path": "./output/" + InputFile.name + "_" + file_data["type"] + format,
+                "name": InputFile.name_base + "_" + file_data["type"] + format,
+                "path": os.path.join("./output", InputFile.name_base + "_" + file_data["type"] + format),
                 "url": file_data["url"]
             }
             self.files.append(file_info)

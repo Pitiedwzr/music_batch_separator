@@ -366,3 +366,4 @@ FodyWeavers.xsd
 miscs/
 /settings.yaml
 /settings_token.yaml
+/output

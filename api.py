@@ -1,4 +1,4 @@
-import re
+﻿import os
 import requests
 import time
 from settings import config
@@ -48,30 +48,55 @@ def downloadFiles(audio_file, response_get_json):
     '''
     Download the files from the response
     '''
+
     result_files = SeparatedFile(response_get_json, audio_file)
-        
+    
+    # Create output directory if it doesn't exist
+    output_dir = "./output"
+    os.makedirs(output_dir, exist_ok=True)
+    
+    if not result_files.files:
+        print("No files found to download!")
+        return
+    
     for file_info in result_files.files:
-        response = requests.get(file_info["url"], stream=True)
-        
-        if response.status_code == 200:
+        try:
+            response = requests.get(file_info["url"], stream=True)
+            
+            response.raise_for_status()
+            
+            # Get file size for progress bar
+            total_size = int(response.headers.get('content-length', 0))
+            
             with open(file_info["path"], 'wb') as file:
-                for chunk in response.iter_content(chunk_size=8192):
-                    if chunk:
-                        file.write(chunk)
-        print(f"File {file_info['name']} downloaded successfully!")
-        
+                if total_size == 0:  # If size is unknown
+                    file.write(response.content)
+                else:
+                    for data in response.iter_content(chunk_size=8192):
+                        file.write(data)
+            
+            # Verify file was created
+            if os.path.exists(file_info["path"]):
+                file_size = os.path.getsize(file_info["path"])
+            else:
+                print(f"File {file_info['name']} was not created!")
+            
+        except requests.exceptions.RequestException as e:
+            print(f"Network error downloading {file_info['name']}: {str(e)}")
+            continue
+        except IOError as e:
+            print(f"File system error for {file_info['name']}: {str(e)}")
+            continue
+        except Exception as e:
+            print(f"Unexpected error while processing {file_info['name']}: {str(e)}")
+            continue
+
+
 audio_file = InputFile("./miscs/Fateful Encounter.mp3")
 audio_file.hash = "20241024004516-ef4bdfa430-fateful-encounter.mp3"
 
-# try:
-    #response_post, response_post_json = createRequest(audio_file,40,29)
+#response_post, response_post_json = createRequest(audio_file,40,29)
 
 response_get, response_get_json = checkStatus(audio_file)
     
 downloadFiles(audio_file, response_get_json)
-
-
-    
-# except Exception as e:
-    # print(f"An error occurred: {str(e)}")
-
