@@ -2,7 +2,7 @@ import sys
 from UI_mainWindow import Ui_MainWindow
 from UI_settingsDialog import Ui_SettingsDialog
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox, QListWidgetItem
+from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox
 from PySide6.QtCore import QTranslator, QLocale, QCoreApplication
 from settings import config
 import api
@@ -22,36 +22,14 @@ class MainWindow(QMainWindow):
         self.ui.actionAbout_Qt.triggered.connect(self.showAboutQt)
         self.ui.actionPreferences.triggered.connect(self.jumpToSettings)
         self.ui.pushButtonProcess.clicked.connect(self.sendRequest)
-        self.ui.listWidgetInput.setAcceptDrops(True)
-        self.ui.listWidgetInput.dragEnterEvent = self.dragEnterEvent
-        self.ui.listWidgetInput.dropEvent = self.dropEvent
         
     def showAboutQt(self):
         QApplication.aboutQt()
         
     def jumpToSettings(self):
         settings_dialog.show()
-    
-    def dragEnterEvent(self, event):
-        if event.mimeData().hasUrls():
-            event.accept()
-        else:
-            event.ignore()
-
-    def dropEvent(self, event):
-        if event.mimeData().hasUrls():
-            urls = event.mimeData().urls()
-            for url in urls:
-                file_path = url.toLocalFile()
-                item = QListWidgetItem(file_path)
-                self.ui.listWidgetInput.addItem(item)
-            event.accept()
-        else:
-            event.ignore()
-            
+     
     def sendRequest(self):
-        audio_file = self.ui.listWidgetInput.currentItem().text()
-        sep_type = self.ui.comboBoxSepType.currentText()
         api.createRequest()
 
 class SettingsDialog(QDialog):
