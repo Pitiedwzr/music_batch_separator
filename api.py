@@ -8,7 +8,9 @@ from file import InputFile, SeparatedFile
 CREATE_URL = "https://mvsep.com/api/separation/create"
 GET_URL = "https://mvsep.com/api/separation/get"
 
-def createRequest(audio_file,sep_type,add_opt1=None,add_opt2=None):
+def createRequest(audio_file,sep_type,add_opt1=None,add_opt2=None,add_opt3=None):
+    audio_file = InputFile(audio_file)
+    
     post_data = {
         "api_token": config.secert.token,
         "sep_type": sep_type,
@@ -20,7 +22,9 @@ def createRequest(audio_file,sep_type,add_opt1=None,add_opt2=None):
         post_data["add_opt1"] = add_opt1
     if add_opt2 is not None:
         post_data["add_opt2"] = add_opt2
-
+    if add_opt3 is not None:
+        post_data["add_opt3"] = add_opt3
+        
     files = {'audiofile': (audio_file.path, audio_file.binary)}
 
     response = requests.post(CREATE_URL, files=files, data=post_data)
@@ -92,11 +96,10 @@ def downloadFiles(audio_file, response_get_json):
             continue
 
 
-audio_file = InputFile("./miscs/Fateful Encounter.mp3")
-audio_file.hash = "20241024004516-ef4bdfa430-fateful-encounter.mp3"
 
-#response_post, response_post_json = createRequest(audio_file,40,29)
 
-response_get, response_get_json = checkStatus(audio_file)
+# response_post, response_post_json = createRequest(audio_file,44,3,1)
+
+# response_get, response_get_json = checkStatus(audio_file)
     
-downloadFiles(audio_file, response_get_json)
+# downloadFiles(audio_file, response_get_json)
