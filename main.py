@@ -5,6 +5,7 @@ from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox
 from PySide6.QtCore import QTranslator, QLocale, QCoreApplication
 from settings import config
+from file import InputFile
 import api
 
 
@@ -30,6 +31,7 @@ class MainWindow(QMainWindow):
         settings_dialog.show()
      
     def sendRequest(self):
+        audio_file_path = self.ui.listWidgetInput.currentItem().text()
         api.createRequest()
 
 class SettingsDialog(QDialog):
